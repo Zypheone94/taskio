@@ -1,4 +1,5 @@
 import os
+from add_content import add_content
 
 # Vérifier l'existance d'un dossier de tache
 if not os.path.isdir('tasks_List'):
@@ -10,18 +11,14 @@ check = True
 while check:
     task_name = input("Quel est le nom de votre liste ? ")
     file_path = 'tasks_list/' + task_name + '.json'
-    if not os.path.exists(file_path):
+    if task_name == '' :
+        print('Le nom de votre liste contient une erreur')
+    elif len(task_name) < 5:
+        print('Le nom de votre liste est trop court')
+    elif not os.path.exists(file_path):
         check = False
     else:
-        print("Votre liste existe déjà, veuillez spécifier un autre nom !")
+        print("Votre liste existe déjà, voulez-vous la modifier ? (Y/n) : ")
 
-
-task_list = [task_name, []]
-
-while True:
-    value = input("Que voulez-vous ajouter à votre liste ? (end pour arreter)")
-    if value == 'end' :
-        break
-    else :
-        task_list[1].append(value)
+    add_content(f'tasks_list/{task_name.replace(' ', '_')}.txt')
 
