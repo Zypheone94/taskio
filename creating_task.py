@@ -1,15 +1,18 @@
 import os
 from add_content import add_content
+from list_tasks import list_tasks
 
-# Vérifier l'existance d'un dossier de tache
-if not os.path.isdir('tasks_List'):
-    os.mkdir('tasks_list')
+# Vérification de la liste de tache et l'existance d'un dossier contenant nos listes
+list_tasks()
 
 # Verification de l'existance d'une tache :
 check = True
 
 while check:
-    task_name = input("Quel est le nom de votre liste ? ")
+    task_name = input("Quel est le nom de votre liste (end pour finir) ? ")
+    if task_name == "end":
+        print("Merci d'avoir utilisé Taskio !")
+        break
     file_path = 'tasks_list/' + task_name + '.json'
     if task_name == '' :
         print('Le nom de votre liste contient une erreur')
@@ -20,5 +23,7 @@ while check:
     else:
         print("Votre liste existe déjà, voulez-vous la modifier ? (Y/n) : ")
 
-    add_content(f'tasks_list/{task_name.replace(' ', '_')}.txt')
+    if check == False:
+        #add_content(f'tasks_list/{task_name.replace(' ', '_')}.txt')
+        pass
 
